@@ -1,0 +1,16 @@
+dependencies {
+  /* PROJECT */
+  implementation project(':qsa-formula-handler-domain')
+  /* QSA */
+  implementation 'com.unideb.qsa:qsa-config-resolver'
+  implementation 'com.unideb.qsa:qsa-config-domain'
+  /* DEPENDENCY */
+  implementation 'org.slf4j:slf4j-api'
+  implementation 'org.springframework:spring-context'
+  implementation 'org.springframework.boot:spring-boot-starter-webflux'
+  /* TEST */
+  testImplementation 'org.testng:testng'
+  testImplementation 'org.mockito:mockito-core'
+}
+
+description = 'qsa-formula-handler-implementation'

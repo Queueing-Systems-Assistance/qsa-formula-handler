@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE suppressions PUBLIC
+    "-//Checkstyle//DTD SuppressionFilter Configuration 1.2//EN"
+    "https://checkstyle.org/dtds/suppressions_1_2.dtd">
+
+<suppressions>
+  <!-- Domain classes -->
+  <suppress checks="JavadocMethod" files="com.unideb.qsa.formula.handler.domain" />
+  <!-- Server classes -->
+  <suppress checks="HideUtilityClassConstructor" files="Application" />
+  <!-- Config classes -->
+  <suppress checks="MissingJavadocMethod" files=".*[/\\]*Config" />
+  <!-- Test classes -->
+  <suppress checks="MagicNumber" files=".*[/\\]*Test" />
+  <suppress checks="JavadocMethod" files=".*[/\\]*Test" />
+  <suppress checks="FileLength" files=".*[/\\]*Test" />
+  <suppress checks="ParameterNumber" files=".*[/\\]*Test" />
+</suppressions>

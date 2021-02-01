@@ -1,0 +1,5 @@
+rootProject.name = 'qsa-formula-handler'
+
+include(':qsa-formula-handler-domain')
+include(':qsa-formula-handler-implementation')
+include(':qsa-formula-handler-server')

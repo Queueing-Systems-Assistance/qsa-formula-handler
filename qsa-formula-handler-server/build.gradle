@@ -1,0 +1,33 @@
+plugins {
+  id 'org.springframework.boot' version '2.4.1'
+}
+
+dependencies {
+  /* PROJECT */
+  implementation project(':qsa-formula-handler-domain')
+  implementation project(':qsa-formula-handler-implementation')
+  /* DEPENDENCY */
+  implementation 'org.springframework.boot:spring-boot-starter-actuator'
+  implementation 'org.springframework.boot:spring-boot-starter-web'
+  implementation 'org.springframework.boot:spring-boot-starter-webflux'
+  implementation 'io.micrometer:micrometer-registry-prometheus'
+  implementation 'net.logstash.logback:logstash-logback-encoder'
+  /* TEST */
+  testImplementation 'org.testng:testng'
+  testImplementation 'org.mockito:mockito-core'
+}
+
+description = 'qsa-formula-handler-server'
+
+bootJar {
+  archiveFileName = 'qsa-formula-handler-final.jar'
+}
+
+springBoot {
+  buildInfo {
+    properties {
+      version = rootProject.projectVersion
+      group = rootProject.projectGroup
+    }
+  }
+}

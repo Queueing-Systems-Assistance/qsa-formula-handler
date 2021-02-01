@@ -1,0 +1,51 @@
+# Spring Metrics
+management:
+  endpoints:
+    enabled-by-default: false
+    web:
+      exposure:
+        include: info,health,prometheus
+  metrics:
+    tags:
+      application: QSA.${spring.application.name}.${spring.profiles.active}
+    enabled: >
+      jvm.memory.used,
+      jvm.memory.max,
+      process.uptime,
+      process.cpu.usage,
+      http.server.requests
+  endpoint:
+    prometheus:
+      enabled: true
+    info:
+      enabled: true
+    health:
+      enabled: true
+
+# Spring Application
+spring:
+  main:
+    banner-mode: "off"
+  mvc:
+    throw-exception-if-no-handler-found: true
+    servlet:
+      load-on-startup: 1
+  application:
+    name: formula-handler
+  profiles:
+    active: dev
+  web:
+    resources:
+      add-mappings: false
+    locale-resolver: accept_header
+
+# Config Packs
+qsa:
+  config:
+    uris: >
+      https://qsa.inf.unideb.hu/lab/api/config/system
+    refresh-rate-in-minutes: 60
+  i18n-service:
+    uri: https://qsa.inf.unideb.hu/lab/api/i18n/keys
+  calculator:
+    uri: https://qsa.inf.unideb.hu/lab/api/calculator/system/%s/outputs
