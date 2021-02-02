@@ -14,6 +14,8 @@ import com.unideb.qsa.formula.handler.implementation.mapper.FormulaSymbolMapper;
 @Component
 public class CalculatedFormulaResolver {
 
+    private static final String CALCULATED_FORMULA_WRAPPER = "$%s$";
+
     @Autowired
     private FormulaSymbolMapper formulaSymbolMapper;
     @Autowired
@@ -31,6 +33,7 @@ public class CalculatedFormulaResolver {
     public String resolve(String systemId, String featureId, Map<String, String> featureConditions) {
         String defaultFormula = defaultFormulaResolver.resolve(systemId, featureId);
         String featureIdMappedFormula = formulaSymbolMapper.map(defaultFormula);
-        return featureFormulaSymbolMapper.map(systemId, featureIdMappedFormula, featureConditions);
+        String substitutedFormula = featureFormulaSymbolMapper.map(systemId, featureIdMappedFormula, featureConditions);
+        return String.format(CALCULATED_FORMULA_WRAPPER, substitutedFormula);
     }
 }
