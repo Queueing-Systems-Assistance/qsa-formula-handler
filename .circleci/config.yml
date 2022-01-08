@@ -61,7 +61,10 @@ commands:
       - run:
           name: Create Container
           command: |
-            ADDITIONAL_CONFIG="{\"HostConfig\":{\"RestartPolicy\":{\"Name\":\"always\"}},\"Env\":[\"JAVA_JVM_ARGS=${JAVA_ENVS}\"],\"Image\":\"${IMAGE_NAME}:${RELEASE_VERSION}\",\"NetworkingConfig\":{\"EndpointsConfig\":{\"${NETWORK}\":{\"IPAMConfig\":{\"IPv4Address\":\"${IP_ADDRESS}\"}}}}}"
+            UPDATED_ENV_NAME=$(echo "${QSA_ENVIRONMENT}" | tr :a-z :A-Z:)
+            JAVA_ARGS_ENV_NAME=JAVA_JVM_ARGS_$UPDATED_ENV_NAME
+            IP_ADDRESS_NAME=IP_ADDRESS_$UPDATED_ENV_NAME
+            ADDITIONAL_CONFIG="{\"HostConfig\":{\"RestartPolicy\":{\"Name\":\"always\"}},\"Env\":[\"JAVA_JVM_ARGS=${!JAVA_ARGS_ENV_NAME}\"],\"Image\":\"${IMAGE_NAME}:${RELEASE_VERSION}\",\"NetworkingConfig\":{\"EndpointsConfig\":{\"${NETWORK}\":{\"IPAMConfig\":{\"IPv4Address\":\"${!IP_ADDRESS_NAME}\"}}}}}"
             curl --request POST --insecure \
               --url "${ENDPOINT}/containers/create?name=${CONTAINER_NAME}" \
               --header "X-API-Key: ${PTR_TOKEN}" \
@@ -74,7 +77,7 @@ commands:
               --url "${ENDPOINT}/containers/${CONTAINER_NAME}/start" \
               --header "X-API-Key: ${PTR_TOKEN}" \
               --header "${HEADER_CONTENT_TYPE}" \
-              --data 'NOT_IMPORTANT_REQUEST_BODY'
+              --data " "
 jobs:
   build:
     environment:
@@ -137,8 +140,6 @@ jobs:
       - image: cimg/base:2022.01
     environment:
       QSA_ENVIRONMENT: lab
-      JAVA_ENVS: ${JAVA_JVM_ARGS_LAB}
-      IP_ADDRESS: ${IP_ADDRESS_LAB}
     steps:
       - deploy
   deploy-prod:
@@ -146,8 +147,6 @@ jobs:
       - image: cimg/base:2022.01
     environment:
       QSA_ENVIRONMENT: prod
-      JAVA_ENVS: ${JAVA_JVM_ARGS_PROD}
-      IP_ADDRESS: ${IP_ADDRESS_PROD}
     steps:
       - deploy
 workflows:
