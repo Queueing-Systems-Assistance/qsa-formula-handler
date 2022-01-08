@@ -43,7 +43,9 @@ commands:
               --url "${ENDPOINT}/images/create?fromImage=${IMAGE_NAME}&tag=${RELEASE_VERSION}" \
               --header "X-API-Key: ${PTR_TOKEN}" \
               --header "X-Registry-Auth: ${DCR_TOKEN}" \
-              --header "${HEADER_CONTENT_TYPE}"
+              --header "${HEADER_CONTENT_TYPE}" \
+              --fail-with-body \
+              --show-error
       - run:
           name: Stop Container
           command: |
@@ -69,7 +71,9 @@ commands:
               --url "${ENDPOINT}/containers/create?name=${CONTAINER_NAME}" \
               --header "X-API-Key: ${PTR_TOKEN}" \
               --header "${HEADER_CONTENT_TYPE}" \
-              --data "${ADDITIONAL_CONFIG}"
+              --data "${ADDITIONAL_CONFIG}" \
+              --fail-with-body \
+              --show-error
       - run:
           name: Start Container
           command: |
@@ -77,7 +81,9 @@ commands:
               --url "${ENDPOINT}/containers/${CONTAINER_NAME}/start" \
               --header "X-API-Key: ${PTR_TOKEN}" \
               --header "${HEADER_CONTENT_TYPE}" \
-              --data " "
+              --data " " \
+              --fail-with-body \
+              --show-error
 jobs:
   build:
     environment:
