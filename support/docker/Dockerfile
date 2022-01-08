@@ -6,7 +6,7 @@ EXPOSE 8080
 
 ENV DIRPATH /qsa-storage/qsa-formula-handler
 RUN mkdir -p $DIRPATH
-RUN apt-get update && apt-get install -y
+RUN apt-get update && apt-get install -y curl
 
 COPY ./qsa-formula-handler-server/build/libs/qsa-formula-handler-final.jar $DIRPATH/qsa-formula-handler.jar
 COPY ./support/docker/init.sh $DIRPATH/init.sh
