@@ -44,7 +44,7 @@ commands:
               --header "X-API-Key: ${PTR_TOKEN}" \
               --header "X-Registry-Auth: ${DCR_TOKEN}" \
               --header "${HEADER_CONTENT_TYPE}" \
-              --fail-with-body \
+              --fail \
               --show-error
       - run:
           name: Stop Container
@@ -72,7 +72,7 @@ commands:
               --header "X-API-Key: ${PTR_TOKEN}" \
               --header "${HEADER_CONTENT_TYPE}" \
               --data "${ADDITIONAL_CONFIG}" \
-              --fail-with-body \
+              --fail \
               --show-error
       - run:
           name: Start Container
@@ -82,7 +82,7 @@ commands:
               --header "X-API-Key: ${PTR_TOKEN}" \
               --header "${HEADER_CONTENT_TYPE}" \
               --data " " \
-              --fail-with-body \
+              --fail \
               --show-error
 jobs:
   build:
