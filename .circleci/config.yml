@@ -39,7 +39,7 @@ commands:
       - run:
           name: Pull Image
           command: |
-            curl --request POST --insecure \
+            curl --request POST \
               --url "${ENDPOINT}/images/create?fromImage=${IMAGE_NAME}&tag=${RELEASE_VERSION}" \
               --header "X-API-Key: ${PTR_TOKEN}" \
               --header "X-Registry-Auth: ${DCR_TOKEN}" \
@@ -47,14 +47,14 @@ commands:
       - run:
           name: Stop Container
           command: |
-            curl --request POST --insecure \
+            curl --request POST \
               --url "${ENDPOINT}/containers/${CONTAINER_NAME}/stop" \
               --header "X-API-Key: ${PTR_TOKEN}" \
               --header "${HEADER_CONTENT_TYPE}"
       - run:
           name: Remove Container
           command: |
-            curl --request DELETE --insecure \
+            curl --request DELETE \
               --url "${ENDPOINT}/containers/${CONTAINER_NAME}" \
               --header "X-API-Key: ${PTR_TOKEN}" \
               --header "${HEADER_CONTENT_TYPE}"
@@ -65,7 +65,7 @@ commands:
             JAVA_ARGS_ENV_NAME=JAVA_JVM_ARGS_$UPDATED_ENV_NAME
             IP_ADDRESS_NAME=IP_ADDRESS_$UPDATED_ENV_NAME
             ADDITIONAL_CONFIG="{\"HostConfig\":{\"RestartPolicy\":{\"Name\":\"always\"}},\"Env\":[\"JAVA_JVM_ARGS=${!JAVA_ARGS_ENV_NAME}\"],\"Image\":\"${IMAGE_NAME}:${RELEASE_VERSION}\",\"NetworkingConfig\":{\"EndpointsConfig\":{\"${NETWORK}\":{\"IPAMConfig\":{\"IPv4Address\":\"${!IP_ADDRESS_NAME}\"}}}}}"
-            curl --request POST --insecure \
+            curl --request POST \
               --url "${ENDPOINT}/containers/create?name=${CONTAINER_NAME}" \
               --header "X-API-Key: ${PTR_TOKEN}" \
               --header "${HEADER_CONTENT_TYPE}" \
@@ -73,7 +73,7 @@ commands:
       - run:
           name: Start Container
           command: |
-            curl --request POST --insecure \
+            curl --request POST \
               --url "${ENDPOINT}/containers/${CONTAINER_NAME}/start" \
               --header "X-API-Key: ${PTR_TOKEN}" \
               --header "${HEADER_CONTENT_TYPE}" \
