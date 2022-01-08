@@ -157,7 +157,7 @@ jobs:
       - deploy
 workflows:
   version: 2
-  workflow:
+  default-pipeline:
     jobs:
       - build:
           context:
