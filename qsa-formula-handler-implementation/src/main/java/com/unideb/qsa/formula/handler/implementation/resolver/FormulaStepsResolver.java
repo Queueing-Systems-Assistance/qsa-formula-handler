@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.unideb.qsa.formula.handler.implementation.assembler.FormulaAssembler;
-import com.unideb.qsa.formula.handler.implementation.client.I18nServiceClient;
+import com.unideb.qsa.formula.handler.implementation.resolver.i18n.MessageResolver;
 
 /**
  * Resolver to resolve formula steps.
@@ -15,7 +15,7 @@ public class FormulaStepsResolver {
     private static final String FORMULA_STEPS_PATTERN = "feature.element.%s.calculation.steps.%s";
 
     @Autowired
-    private I18nServiceClient i18nServiceClient;
+    private MessageResolver i18nServiceClient;
     @Autowired
     private FormulaAssembler formulaAssembler;
 

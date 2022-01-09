@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.unideb.qsa.formula.handler.implementation.client.I18nServiceClient;
+import com.unideb.qsa.formula.handler.implementation.resolver.i18n.MessageResolver;
 import com.unideb.qsa.formula.handler.implementation.trimmer.FormulaTrimmer;
 import com.unideb.qsa.formula.handler.implementation.trimmer.SimpleFormulaTrimmer;
 
@@ -18,7 +18,7 @@ public class FormulaAssembler {
     private static final String DEFAULT_FORMULA_PATTERN = "feature.element.%s.calculation.default.%s";
 
     @Autowired
-    private I18nServiceClient i18nServiceClient;
+    private MessageResolver i18nServiceClient;
     @Autowired
     private FormulaTrimmer formulaTrimmer;
     @Autowired
