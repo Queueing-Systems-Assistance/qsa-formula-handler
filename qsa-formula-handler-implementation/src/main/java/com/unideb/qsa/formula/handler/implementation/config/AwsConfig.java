@@ -34,7 +34,8 @@ public class AwsConfig {
                                    .build(I18nResolver.class);
     }
 
-    private AWSLambda createAWSLambdaClient() {
+    @Bean
+    public AWSLambda createAWSLambdaClient() {
         return AWSLambdaClient.builder()
                               .withRegion(Regions.EU_CENTRAL_1)
                               .withCredentials(new AWSStaticCredentialsProvider(createCredentials()))
